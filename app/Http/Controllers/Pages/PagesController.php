@@ -59,7 +59,7 @@ class PagesController extends Controller
             $imageName = Str::slug($request->page_name) . '-' . $date;
             Image::make($request->file('image'))->save(public_path('/uploads/pages/') . $imageName . '.jpg')->encode('jpg','50');
             $request->merge(['page_image' => '/uploads/pages/'.$imageName.'.jpg']);
-            $request->merge(['page_status' => $request->page_status]);
+            $request->merge(['page_status' => $request->page_status == 'on' ? 'on' : 'off']);
             Pages::create($request->all());
             return response(['status' => 'success', 'title' => 'Başarılı', 'content' => 'Sayfa Eklendi']);
         } catch (\Exception $e) {

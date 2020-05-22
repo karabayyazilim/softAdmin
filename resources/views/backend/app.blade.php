@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>AdminLTE 3 | Dashboard 2</title>
 
-
+    <link rel="stylesheet" href="/backend/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
     <link rel="stylesheet" href="/backend/plugins/select2/css/select2.min.css">
     <link rel="stylesheet" href="/backend/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="/backend/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
@@ -55,7 +55,7 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item has-treeview {{ request()->is('admin/blogs','admin/blog-add','admin/blog-edit','admin/blog-category','admin/blog-category-add','admin//blog-category-edit') ? 'menu-open' : '' }}">
+                    <li class="nav-item has-treeview {{ request()->is('admin/blogs','admin/blogs/blog-add','admin/blogs/blog-edit/*','admin/blogs/blog-category','admin/blogs/blog-category-add','admin/blogs/blog-category-edit/*') ? 'menu-open' : '' }}">
                         <a href="" class="nav-link ">
                             <i class="nav-icon fab fa-blogger-b"></i>
                             <p>
@@ -71,19 +71,19 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('blog-add')}}" class="nav-link {{ request()->is('admin/blog-add') ? 'active' : '' }}">
+                                <a href="{{route('blog-add')}}" class="nav-link {{ request()->is('admin/blogs/blog-add') ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Blog Ekle</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('blog-category')}}" class="nav-link {{ request()->is('admin/blog-category') ? 'active' : '' }}">
+                                <a href="{{route('blog-category')}}" class="nav-link {{ request()->is('admin/blogs/blog-category') ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Blog Kategori</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('blog-category-add')}}" class="nav-link {{ request()->is('admin/blog-category-edit') ? 'active' : '' }}">
+                                <a href="{{route('blog-category-add')}}" class="nav-link {{ request()->is('admin/blogs/blog-category-add') ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Blog Kategori Ekle</p>
                                 </a>
@@ -91,7 +91,7 @@
                         </ul>
                     </li>
 
-                    <li class="nav-item has-treeview {{ request()->is('admin/pages','admin/page-add','admin/page-edit') ? 'menu-open' : '' }}">
+                    <li class="nav-item has-treeview {{ request()->is('admin/pages','admin/pages/page-add','admin/pages/page-edit/*') ? 'menu-open' : '' }}">
                         <a href="#" class="nav-link ">
                             <i class="nav-icon fas fa-pager"></i>
                             <p>
@@ -107,7 +107,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('page-add')}}" class="nav-link {{ request()->is('admin/page-add') ? 'active' : '' }}">
+                                <a href="{{route('page-add')}}" class="nav-link {{ request()->is('admin/pages/page-add') ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Sayfa Ekle</p>
                                 </a>
@@ -115,7 +115,7 @@
                         </ul>
                     </li>
 
-                    <li class="nav-item has-treeview {{ request()->is('admin/sliders','admin/slider-add','admin/slider-edit') ? 'menu-open' : '' }}">
+                    <li class="nav-item has-treeview {{ request()->is('admin/sliders','admin/sliders/slider-add','admin/sliders/slider-edit/*') ? 'menu-open' : '' }}">
                         <a href="" class="nav-link">
                             <i class="nav-icon fas fa-images"></i>
                             <p>
@@ -131,7 +131,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('slider-add')}}" class="nav-link {{ request()->is('admin/slider-add') ? 'active' : '' }}">
+                                <a href="{{route('slider-add')}}" class="nav-link {{ request()->is('admin/sliders/slider-add') ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Slider Ekle</p>
                                 </a>
@@ -139,7 +139,7 @@
                         </ul>
                     </li>
 
-                    <li class="nav-item has-treeview {{ request()->is('admin/menus','admin/menu-add','admin/menu-edit') ? 'menu-open' : '' }}">
+                    <li class="nav-item has-treeview {{ request()->is('admin/menus','admin/menus/menu-add','admin/menus/menu-edit/*') ? 'menu-open' : '' }}">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-compass"></i>
                             <p>
@@ -155,14 +155,15 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('menu-add')}}" class="nav-link {{ request()->is('admin/menu-add') ? 'active' : '' }}">
+                                <a href="{{route('menu-add')}}" class="nav-link {{ request()->is('admin/menus/menu-add') ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Menü Ekle</p>
                                 </a>
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item has-treeview {{ request()->is('admin/users','admin/user-add','admin/user-edit') ? 'menu-open' : '' }}">
+
+                    <li class="nav-item has-treeview {{ request()->is('admin/users','admin/users/user-add','admin/users/user-edit/*') ? 'menu-open' : '' }}">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-users"></i>
                             <p>
@@ -178,7 +179,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('user-add')}}" class="nav-link {{ request()->is('admin/user-add') ? 'active' : '' }}">
+                                <a href="{{route('user-add')}}" class="nav-link {{ request()->is('admin/users/user-add') ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Kullanıcı Ekle</p>
                                 </a>
@@ -193,7 +194,6 @@
                             </p>
                         </a>
                     </li>
-
 
                 </ul>
             </nav>
@@ -241,6 +241,22 @@
         filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
         filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
     };
+</script>
+
+<script src="/backend/plugins/datatables/jquery.dataTables.js"></script>
+<script src="/backend/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+<script>
+    $(function () {
+        $("#example1").DataTable();
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+        });
+    });
 </script>
 
 

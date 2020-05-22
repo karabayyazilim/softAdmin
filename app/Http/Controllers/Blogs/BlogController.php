@@ -8,6 +8,7 @@ use App\Models\Category;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
@@ -25,9 +26,11 @@ class BlogController extends Controller
         return view('backend.blog.blog-add')->with('categories', $categories);
     }
 
-    public function getBlogsEdit()
+    public function getBlogsEdit($blogId)
     {
-        return view('backend.blog.blog-edit');
+        $categories = Category::all();
+        $blog = Blogs::where('id',$blogId)->first();
+        return view('backend.blog.blog-edit')->with('categories', $categories)->with('blog',$blog);
     }
 
 
@@ -67,9 +70,34 @@ class BlogController extends Controller
         }
     }
 
-    public function postBlogsEdit()
+    public function postBlogsEdit(Request $request, $blogId)
     {
-        return view('backend.blog.blog-edit');
+        try {
+            $blogs =  Blogs::where('id',$blogId)->first();
+            $date = Str::slug(Carbon::now());
+            $slug = Str::slug($request->blog_title) . '-' . $date;
+            if ($request->hasFile('blog_image')){
+                File::delete(public_path($blogs->blog_image));
+                Image::make($request->file('blog_image'))->save(public_path('/uploads/blogs/') . $slug . '.jpg')->encode('jpg','50');
+            }
+
+            Blogs::where('id',$blogId)->update([
+                'blog_title' => $request->blog_title,
+                'blog_description' => $request->blog_description,
+                'blog_tags' => $request->blog_tags,
+                'blog_content' => $request->blog_content,
+                'blog_image' => $request->hasFile('blog_image') ? '/uploads/blogs/' . $slug . '.jpg' : $blogs->page_image,
+                'blog_author' => Auth::user()->id,
+                'blog_slug' => $slug,
+                'blog_categoryId' => $request->blog_categoryId,
+                'blog_status' => $request->blog_status == 'on' ? 'on' : 'off',
+            ]);
+
+            return response(['status' => 'success', 'title' => 'Başarılı', 'content' => 'Blog Güncellendi ']);
+        } catch (\Exception $e) {
+            echo $e;
+            //return response(['status' => 'error', 'title' => 'Başarısız', 'content' => 'Blog Güncellenemedi']);
+        }
     }
 
 

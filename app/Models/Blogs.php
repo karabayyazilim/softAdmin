@@ -22,4 +22,13 @@ class Blogs extends Model
         'blog_categoryId',
         'blog_status',
     ];
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function userName()
+    {
+        return $this->hasOne('App\User', 'id', 'blog_author');
+    }
 }

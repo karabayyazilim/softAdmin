@@ -30,6 +30,7 @@
                             <thead>
                             <tr>
                                 <th>Blog Başlık</th>
+                                <th>Yazar</th>
                                 <th>Yayınlanma Tarihi</th>
                                 <th>İşlemler</th>
                             </tr>
@@ -38,6 +39,7 @@
                             @foreach($blogs  as $blog)
                                 <tr>
                                     <td>{{$blog->blog_title}}</td>
+                                    <td>{{$blog->userName->name}}</td>
                                     <td>{{$blog->created_at}}</td>
                                     <td>
                                         <a href="{{route('blog-edit',$blog->id)}}" class="btn btn-primary"><i class="fas fa-edit"></i>&nbsp;Düzenle</a>

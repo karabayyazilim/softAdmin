@@ -71,6 +71,7 @@ class MenusController extends Controller
         try {
             $slug = Str::slug($request->menu_name, '-');
             $request->merge(['menu_slug' => $slug]);
+            $request->merge(['menu_status' => $request->menu_status == 'on' ? 'on' : 'off']);
             Menu::create($request->all());
             return response(['status' => 'success', 'title' => 'Başarılı', 'content' => 'Menü Eklendi']);
         } catch (\Exception $e) {
