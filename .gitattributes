@@ -1,5 +1,6 @@
 * text=auto
-*.php linguist-detectable=true
+*.php linguist-detectable=false
 *.css linguist-detectable=false
 *.js linguist-detectable=false
+*.html linguist-detectable=false
 CHANGELOG.md export-ignore
