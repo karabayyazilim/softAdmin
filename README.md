@@ -16,7 +16,7 @@ Run the migrations
 
 Your good to go!
 
-Run the migrations
+Login information
 
     user name : admin@admin.com
     password : password
