@@ -31,33 +31,36 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Adı</label>
-                                            <input required type="text" class="form-control" placeholder=" Adı Yazınız">
+                                            <label>Adı</label>
+                                            <input required type="text" name="name" class="form-control" placeholder=" Adı Yazınız">
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Email</label>
-                                            <input required type="email" class="form-control" placeholder=" Email Yazınız">
+                                            <label>Email</label>
+                                            <input required type="email" name="email" class="form-control"
+                                                   placeholder=" Email Yazınız">
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Şifre</label>
-                                            <input required type="password" class="form-control" placeholder="Şifre Yazınız">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Şifre Tekrar</label>
-                                            <input required type="password" class="form-control" placeholder="Şifre Tekrar Yazınız">
+                                            <label>Şifre</label>
+                                            <input required type="password" name="password" class="form-control"
+                                                   placeholder="Şifre Yazınız">
                                         </div>
 
                                         <label>Rol</label>
-                                        <select required class="form-control select2" style="width: 100%;">
-                                            <option>Admin</option>
-                                            <option>Editor</option>
+                                        <select required class="form-control select2" style="width: 100%;" name="rolId">
+                                            @foreach($roles as $role)
+                                                <option value="{{$role->id}}">{{$role->rol_name}}</option>
+                                            @endforeach
                                         </select>
+
+                                        <div class="form-group">
+                                            <label for="">Kullanıcı Durumu</label><br>
+                                            <input type="checkbox" name="user_status" checked data-bootstrap-switch>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Ekle</button>
+                                    <button id="usersButton" type="button" class="btn btn-primary">Ekle</button>
                                 </div>
                             </div>
                         </div>
@@ -72,6 +75,7 @@
 @section('js')
 
     <script src="/backend/plugins/select2/js/select2.full.min.js"></script>
+    <script src="/backend/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
 
     <script>
         $(function () {
@@ -83,12 +87,40 @@
                 theme: 'bootstrap4'
             })
 
-            $("input[data-bootstrap-switch]").each(function(){
+            $("input[data-bootstrap-switch]").each(function () {
                 $(this).bootstrapSwitch('state', $(this).prop('checked'));
             });
         });
     </script>
 
+    <script>
+
+        $("#usersButton").click(function () {
+
+            var url = "{{route("user-add")}}";
+            var form = new FormData($("form")[0]);
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form,
+                processData: false,
+                contentType: false,
+
+                success: function (response) {
+                    if (response.status=="success"){
+                        toastr.success(response.content, response.title);
+                    }
+                    else{
+                        toastr.error(response.content, response.title);
+                    }
+                },
+                error: function () {
+
+                }
+            });
+        })
+    </script>
 
 
 

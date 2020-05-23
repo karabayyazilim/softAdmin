@@ -73,7 +73,10 @@ Route::prefix("admin")->group(function () {
     Route::prefix("users")->group(function () {
         Route::get('/', 'Users\UsersController@getUsers')->name("users");
         Route::get('/user-add', 'Users\UsersController@getUsersAdd')->name("user-add");
-        Route::get('/user-edit', 'Users\UsersController@getUsersEdit')->name("user-edit");
+        Route::get('/user-edit/{userId}', 'Users\UsersController@getUsersEdit')->name("user-edit");
+        Route::post('/', 'Users\UsersController@postUsers')->name("users");
+        Route::post('/user-add', 'Users\UsersController@postUsersAdd')->name("user-add");
+        Route::post('/user-edit/{userId}', 'Users\UsersController@postUsersEdit')->name("user-edit");
     });
 
     Route::prefix("settings")->group(function () {

@@ -53,7 +53,7 @@
                                 </div>
 
                                 <div class="card-footer">
-                                    <button id="pageButton" type="button" class="btn btn-primary">Yayınla</button>
+                                    <button id="pageButton" type="button" class="btn btn-primary">Kaydet</button>
                                 </div>
                             </div>
                         </div>

@@ -59,7 +59,7 @@
                                 </div>
 
                                 <div class="card-footer">
-                                    <button id="blogsButton" type="button" class="btn btn-primary">Yayınla</button>
+                                    <button id="blogsButton" type="button" class="btn btn-primary">Kaydet</button>
                                 </div>
                             </div>
                         </div>
