@@ -21,6 +21,11 @@ Configure your .env file
 Run the migrations
 
     php artisan migrate --seed
+    
+Run the command 
+
+    php artisan storage:link
+
 
 Your good to go!
 
