@@ -25,6 +25,7 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']
 Route::prefix("admin")->group(function () {
 
     Route::get('/home', 'HomeGetController@index')->name("index");
+    Route::get('/files', 'Files\FileManagementController@getFiles')->name("files");
 
 
     Route::prefix("blogs")->group(function () {

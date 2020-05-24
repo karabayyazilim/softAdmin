@@ -31,6 +31,10 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <div class="form-group">
+                                            <label>Kullanıcı Resmi</label>
+                                            <input required type="file" name="avatar" class="form-control" >
+                                        </div>
+                                        <div class="form-group">
                                             <label>Adı</label>
                                             <input required type="text" name="name" value="{{$user->name}}" class="form-control" placeholder=" Adı Yazınız">
                                         </div>

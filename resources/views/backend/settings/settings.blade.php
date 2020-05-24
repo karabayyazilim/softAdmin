@@ -19,8 +19,56 @@
             </div>
         </div>
 
+
         <section class="content">
             <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card direct-chat direct-chat-warning collapsed-card">
+                            <div class="card-header">
+                                <h3 class="card-title">Slider Ekle</h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
+                                            class="fas fa-minus"></i></button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <br>
+                                <center>
+                                    <form method="post">
+                                        <div class="form-group row col-md-11">
+                                            <div class="col-md-3">
+                                                <input type="text" name="title" class="form-control" required
+                                                       placeholder="Ayar Açıklama Yazınız">
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <input type="text" name="title" class="form-control" required
+                                                       placeholder="Anahtar Kelime Yazınız">
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <select class="form-control select2" name="setting_type" id="">
+                                                    <option value="">Textarea</option>
+                                                    <option value="">İmage</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <button class="btn btn-primary"> Kaydet</button>
+                                            </div>
+
+                                        </div>
+
+                                    </form>
+                                    <br>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Site Ayarları Listesi</h3>
@@ -56,9 +104,27 @@
 @endsection
 
 @section('js')
+    <script src="/backend/plugins/select2/js/select2.full.min.js"></script>
+    <script src="/backend/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
 
+    <script>
+        $(function () {
+            //Initialize Select2 Elements
+            $('.select2').select2()
+
+            //Initialize Select2 Elements
+            $('.select2bs4').select2({
+                theme: 'bootstrap4'
+            })
+
+            $("input[data-bootstrap-switch]").each(function () {
+                $(this).bootstrapSwitch('state', $(this).prop('checked'));
+            });
+        });
+
+    </script>
 @endsection
 
 @section('css')
-
+    <link rel="stylesheet" href="/backend/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 @endsection

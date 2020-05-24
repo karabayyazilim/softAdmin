@@ -5,8 +5,12 @@ namespace App\Http\Controllers\Users;
 use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class UsersController extends Controller
 {
@@ -51,7 +55,12 @@ class UsersController extends Controller
     public function postUsersAdd(Request $request)
     {
         try {
+            $date = Str::slug(Carbon::now());
+            $imageName = Str::slug($request->name) . '-' . $date;
+            Image::make($request->file('image'))->save(public_path('/uploads/users/') . $imageName . '.jpg')->encode('jpg','50');
+
             User::create([
+                'avatar' => '/uploads/users/' . $imageName . '.jpg',
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
@@ -68,7 +77,16 @@ class UsersController extends Controller
     public function postUsersEdit(Request $request,$userId)
     {
         try {
+            $users =  User::where('id',$userId)->first();
+            if ($request->hasFile('avatar')) {
+                File::delete(public_path($users->avatar));
+                $date = Str::slug(Carbon::now());
+                $imageName = Str::slug($request->name) . '-' . $date;
+                Image::make($request->file('avatar'))->save(public_path('/uploads/users/') . $imageName . '.jpg')->encode('jpg', '50');
+            }
+
             User::where('id',$userId)->update([
+                'avatar' => $request->hasFile('avatar') ? '/uploads/users/' . $imageName . '.jpg' : $users->avatar,
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
@@ -77,7 +95,8 @@ class UsersController extends Controller
             ]);
             return response(['status' => 'success', 'title' => 'Başarılı', 'content' => 'Kullanıcı Güncellendi']);
         } catch (\Exception $e) {
-            return response(['status' => 'error', 'title' => 'Başarısız', 'content' => 'Kullanıcı Güncellenemedi']);
+            echo $e;
+            //return response(['status' => 'error', 'title' => 'Başarısız', 'content' => 'Kullanıcı Güncellenemedi']);
         }
     }
 }
