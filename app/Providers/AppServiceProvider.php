@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Settings;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +24,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $data['settingss'] = Settings::all();
+
+        foreach ($data['settingss'] as $key){
+            $settingss[$key->setting_key]=$key->setting_value;
+        }
+        view()->share($settingss);
     }
 }

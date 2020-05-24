@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>AdminLTE 3 | Dashboard 2</title>
+
+    <title>{{$title}}</title>
+
 
     <link rel="stylesheet" href="/backend/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
     <link rel="stylesheet" href="/backend/plugins/select2/css/select2.min.css">
@@ -29,7 +31,7 @@
 
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <a href="index3.html" class="brand-link">
-            <img src="/backend/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+            <img src="{{$site_image}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                  style="opacity: .8">
             <span class="brand-text font-weight-light">AdminLTE 3</span>
         </a>

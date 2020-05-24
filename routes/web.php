@@ -82,7 +82,9 @@ Route::prefix("admin")->group(function () {
 
     Route::prefix("settings")->group(function () {
         Route::get('/', 'Settings\SettingsController@getSettings')->name("settings");
-        Route::get('/setting-edit', 'Settings\SettingsController@getSettingsEdit')->name("setting-edit");
+        Route::get('/setting-edit/{settingId}', 'Settings\SettingsController@getSettingsEdit')->name("setting-edit");
+        Route::post('/', 'Settings\SettingsController@postSettings')->name("settings");
+        Route::post('/setting-edit/{settingId}', 'Settings\SettingsController@postSettingsEdit')->name("setting-edit");
     });
 });
 

@@ -39,24 +39,28 @@
                                     <form method="post">
                                         <div class="form-group row col-md-11">
                                             <div class="col-md-3">
-                                                <input type="text" name="title" class="form-control" required
+                                                <input type="text" name="setting_description" class="form-control"
+                                                       required
                                                        placeholder="Ayar Açıklama Yazınız">
                                             </div>
 
                                             <div class="col-md-3">
-                                                <input type="text" name="title" class="form-control" required
+                                                <input type="text" name="setting_key" class="form-control" required
                                                        placeholder="Anahtar Kelime Yazınız">
                                             </div>
 
                                             <div class="col-md-3">
                                                 <select class="form-control select2" name="setting_type" id="">
-                                                    <option value="">Textarea</option>
-                                                    <option value="">İmage</option>
+                                                    <option value="textarea">Textarea</option>
+                                                    <option value="img">İmage</option>
+                                                    <option value="input">Text</option>
                                                 </select>
                                             </div>
 
                                             <div class="col-md-3">
-                                                <button class="btn btn-primary btn-block"> Kaydet</button>
+                                                <button id="settingsButton" type="button"
+                                                        class="btn btn-primary btn-block"> Kaydet
+                                                </button>
                                             </div>
 
                                         </div>
@@ -84,14 +88,17 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>Trident</td>
-                                <td>Win 95+</td>
-                                <td>Win 95+</td>
-                                <td>
-                                    <a href="page-edit.html" class="btn btn-primary"><i class="fas fa-edit"></i>&nbsp;Düzenle</a>
-                                </td>
-                            </tr>
+                            @foreach($settings as $setting)
+                                <tr>
+                                    <td>{{$setting->setting_description}}</td>
+                                    <td>{{$setting->setting_key}}</td>
+                                    <td>{{$setting->setting_value}}</td>
+                                    <td>
+                                        <a href="{{route('setting-edit',$setting->id)}}" class="btn btn-primary"><i class="fas fa-edit"></i>&nbsp;Düzenle</a>
+                                        <button class="btn btn-danger" onclick="deleteSettings(this,'{{$setting->id}}')"><i class="fas fa-trash-alt"></i>&nbsp;Sil</button>
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tbody>
 
                         </table>
@@ -104,8 +111,11 @@
 @endsection
 
 @section('js')
+    <script src="/js/sweetalert2.js"></script>
+    <script src="/backend/plugins/sweetalert2/sweetalert2.min.js"></script>
     <script src="/backend/plugins/select2/js/select2.full.min.js"></script>
     <script src="/backend/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+
 
     <script>
         $(function () {
@@ -123,6 +133,83 @@
         });
 
     </script>
+
+    //setting add
+    <script>
+
+        $("#settingsButton").click(function () {
+
+            var url = "{{route("settings")}}";
+            var form = new FormData($("form")[0]);
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form,
+                processData: false,
+                contentType: false,
+
+                success: function (response) {
+                    if (response.status == "success") {
+                        toastr.success(response.content, response.title);
+                    } else {
+                        toastr.error(response.content, response.title);
+                    }
+                },
+                error: function () {
+
+                }
+            });
+        })
+    </script>
+
+
+    //setting delete
+    <script>
+        function deleteSettings(r, id) {
+            var list = r.parentNode.parentNode.rowIndex;
+            swal({
+                title: 'Silmek istediğinize emin misiniz?',
+                text: "Sildiğinizde geri dönüşümü olmayacaktır!",
+                type: 'warning',
+                showCancelButton: true,
+                cancelButtonText: 'İptal',
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Evet, Sil!'
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax
+                    ({
+                        type: "Post",
+                        url: '{{route('settings')}}',
+                        data: {
+                            'id': id,
+                            'delete': 'delete'
+                        },
+                        beforeSubmit: function () {
+                            swal({
+                                title: '<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i> <span class="sr-only">Loading...</span>',
+                                text: 'Siliniyor lütfen bekleyiniz...',
+                                showConfirmButton: false
+                            })
+                        },
+                        success: function (response) {
+                            if (response.status == 'success') {
+                                document.getElementById('example1').deleteRow(list);
+                                toastr.success(response.content, response.title);
+                            } else {
+                                toastr.error(response.content, response.title);
+                            }
+                        }
+
+                    })
+                } else {
+                }
+            })
+        }
+    </script>
+
 @endsection
 
 @section('css')
