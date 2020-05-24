@@ -26,7 +26,7 @@
                     <div class="col-md-12">
                         <div class="card direct-chat direct-chat-warning collapsed-card">
                             <div class="card-header">
-                                <h3 class="card-title">Slider Ekle</h3>
+                                <h3 class="card-title">Site Ayar Ekle</h3>
 
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
@@ -56,7 +56,7 @@
                                             </div>
 
                                             <div class="col-md-3">
-                                                <button class="btn btn-primary"> Kaydet</button>
+                                                <button class="btn btn-primary btn-block"> Kaydet</button>
                                             </div>
 
                                         </div>
