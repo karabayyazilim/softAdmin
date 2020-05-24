@@ -8,7 +8,7 @@
 
     <title>{{$title}}</title>
 
-
+    <link rel="icon" href="{{$site_image}}">
     <link rel="stylesheet" href="/backend/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
     <link rel="stylesheet" href="/backend/plugins/select2/css/select2.min.css">
     <link rel="stylesheet" href="/backend/plugins/fontawesome-free/css/all.min.css">
