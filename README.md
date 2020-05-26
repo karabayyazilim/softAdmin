@@ -29,7 +29,7 @@ Run the command
 
     php artisan storage:link
     
-remove comment line `App\Providers\AppServiceProvider.php` 
+Remove comment line `App\Providers\AppServiceProvider.php` 
 
     //$data['settingss'] = Settings::all();
         if (isset($data['settingss'])){
