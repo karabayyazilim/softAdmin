@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Users;
+namespace App\Http\Controllers\Backend\Users;
 
 use App\Http\Controllers\Controller;
 use App\Models\Role;

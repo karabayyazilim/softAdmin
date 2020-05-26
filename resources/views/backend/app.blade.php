@@ -65,7 +65,8 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item has-treeview {{ request()->is('admin/blogs','admin/blogs/blog-add','admin/blogs/blog-edit/*','admin/blogs/blog-category','admin/blogs/blog-category-add','admin/blogs/blog-category-edit/*') ? 'menu-open' : '' }}">
+
+                    <li class="nav-item has-treeview  {{ request()->is('admin/blogs','admin/blogs/blog-add','admin/blogs/blog-edit/*','admin/blogs/blog-category','admin/blogs/blog-category-add','admin/blogs/blog-category-edit/*') ? 'menu-open' : '' }}">
                         <a href="" class="nav-link ">
                             <i class="nav-icon fab fa-blogger-b"></i>
                             <p>
@@ -101,7 +102,7 @@
                         </ul>
                     </li>
 
-                    <li class="nav-item has-treeview {{ request()->is('admin/pages','admin/pages/page-add','admin/pages/page-edit/*') ? 'menu-open' : '' }}">
+                    <li class="nav-item has-treeview {{\Illuminate\Support\Facades\Auth::user()->rolId == 1 ? ' ' : 'd-none'}} {{ request()->is('admin/pages','admin/pages/page-add','admin/pages/page-edit/*') ? 'menu-open' : '' }}">
                         <a href="#" class="nav-link ">
                             <i class="nav-icon fas fa-pager"></i>
                             <p>
@@ -125,7 +126,7 @@
                         </ul>
                     </li>
 
-                    <li class="nav-item has-treeview {{ request()->is('admin/sliders','admin/sliders/slider-add','admin/sliders/slider-edit/*') ? 'menu-open' : '' }}">
+                    <li class="nav-item has-treeview {{\Illuminate\Support\Facades\Auth::user()->rolId == 1 ? ' ' : 'd-none'}} {{ request()->is('admin/sliders','admin/sliders/slider-add','admin/sliders/slider-edit/*') ? 'menu-open' : '' }}">
                         <a href="" class="nav-link">
                             <i class="nav-icon fas fa-images"></i>
                             <p>
@@ -149,7 +150,7 @@
                         </ul>
                     </li>
 
-                    <li class="nav-item has-treeview {{ request()->is('admin/menus','admin/menus/menu-add','admin/menus/menu-edit/*') ? 'menu-open' : '' }}">
+                    <li class="nav-item has-treeview {{\Illuminate\Support\Facades\Auth::user()->rolId == 1 ? ' ' : 'd-none'}} {{ request()->is('admin/menus','admin/menus/menu-add','admin/menus/menu-edit/*') ? 'menu-open' : '' }}">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-compass"></i>
                             <p>
@@ -173,7 +174,7 @@
                         </ul>
                     </li>
 
-                    <li class="nav-item has-treeview {{ request()->is('admin/users','admin/users/user-add','admin/users/user-edit/*') ? 'menu-open' : '' }}">
+                    <li class="nav-item has-treeview {{\Illuminate\Support\Facades\Auth::user()->rolId == 1 ? ' ' : 'd-none'}} {{ request()->is('admin/users','admin/users/user-add','admin/users/user-edit/*') ? 'menu-open' : '' }}">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-users"></i>
                             <p>
@@ -196,11 +197,20 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item {{\Illuminate\Support\Facades\Auth::user()->rolId == 1 ? ' ' : 'd-none'}}">
                         <a href="{{route('settings')}}" class="nav-link {{ request()->is('admin/settings') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-cogs"></i>
                             <p>
                                 Site Ayarları
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{route('backend-logout')}}" class="nav-link ">
+                            <i class="nav-icon fas fa-sign-out-alt"></i>
+                            <p>
+                                Çıkış Yap
                             </p>
                         </a>
                     </li>

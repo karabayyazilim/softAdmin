@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Sliders;
+namespace App\Http\Controllers\Backend\Sliders;
 
 use App\Http\Controllers\Controller;
 use App\Models\Sliders;
@@ -34,6 +34,8 @@ class SlidersController extends Controller
     {
         if (isset($request->delete)) {
             try {
+                $sliders =  Sliders::where('id',$request->id)->first();
+                File::delete(public_path($sliders->slider_image));
                 Sliders::where('id', $request->id)->delete();
                 return response(['status' => 'success', 'title' => 'Başarılı', 'content' => 'Slider Silindi']);
             } catch (\Exception $e) {
