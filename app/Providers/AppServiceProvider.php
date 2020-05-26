@@ -24,9 +24,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $data['settingss'] = Settings::all();
         if (isset($data['settingss'])){
-            $data['settingss'] = Settings::all();
-
             foreach ($data['settingss'] as $key){
                 $settingss[$key->setting_key]=$key->setting_value;
             }
