@@ -28,6 +28,16 @@ Run the migrations
 Run the command 
 
     php artisan storage:link
+    
+remove comment line `App\Providers\AppServiceProvider.php` 
+
+    //$data['settingss'] = Settings::all();
+        if (isset($data['settingss'])){
+            foreach ($data['settingss'] as $key){
+                $settingss[$key->setting_key]=$key->setting_value;
+            }
+            view()->share($settingss);
+        }
 
 
 Your good to go!
