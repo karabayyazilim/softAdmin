@@ -37,6 +37,8 @@ class UsersController extends Controller
     {
         if (isset($request->delete)) {
             try {
+                $users =  User::where('id',$request->id)->first();
+                File::delete(public_path($users->avatar));
                 User::where('id', $request->id)->delete();
                 return response(['status' => 'success', 'title' => 'Başarılı', 'content' => 'Kullanıcı Silindi']);
             } catch (\Exception $e) {

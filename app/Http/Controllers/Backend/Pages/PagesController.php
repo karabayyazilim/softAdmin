@@ -33,6 +33,8 @@ class PagesController extends Controller
 
         if(isset($request->delete)){
             try {
+                $pages =  Pages::where('id',$request->id)->first();
+                File::delete(public_path($pages->page_image));
                 Pages::where('id', $request->id)->delete();
                 if (isset($request->page_image)){
                     File::delete(public_path($request->page_image));

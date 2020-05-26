@@ -38,6 +38,8 @@ class BlogController extends Controller
     {
         if (isset($request->delete)) {
             try {
+                $blogs =  Blogs::where('id',$request->id)->first();
+                File::delete(public_path($blogs->blog_image));
                 Blogs::where('id', $request->id)->delete();
                 return response(['status' => 'success', 'title' => 'Başarılı', 'content' => 'Blog Silindi']);
             } catch (\Exception $e) {
