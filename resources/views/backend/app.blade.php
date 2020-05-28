@@ -138,7 +138,7 @@
                             <li class="nav-item">
                                 <a href="{{route('sliders')}}" class="nav-link {{ request()->is('admin/sliders') ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Sayfa Listesi</p>
+                                    <p>Slider Listesi</p>
                                 </a>
                             </li>
                             <li class="nav-item">
