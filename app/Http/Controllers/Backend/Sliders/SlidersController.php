@@ -84,10 +84,9 @@ class SlidersController extends Controller
                 'slider_status'=> $request->slider_status == 'on' ? 'on' : 'off',
             ]);
 
-            return response(['status' => 'success', 'title' => 'Başarılı', 'content' => 'Sayfa Güncellendi ']);
+            return response(['status' => 'success', 'title' => 'Başarılı', 'content' => 'Slider Güncellendi ']);
         } catch (\Exception $e) {
-            echo $e;
-            //return response(['status' => 'error', 'title' => 'Başarısız', 'content' => 'Sayfa Güncellenemedi']);
+            return response(['status' => 'error', 'title' => 'Başarısız', 'content' => 'Slider Güncellenemedi']);
         }
     }
 }
