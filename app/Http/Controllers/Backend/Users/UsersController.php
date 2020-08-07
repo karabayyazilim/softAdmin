@@ -91,7 +91,7 @@ class UsersController extends Controller
                 'avatar' => $request->hasFile('avatar') ? '/uploads/users/' . $imageName . '.jpg' : $users->avatar,
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => Hash::make($request->password),
+                'password' => $request->password ==  $users->password ? $users->password : Hash::make($request->password),
                 'rolId' => $request->rolId,
                 'user_status' => $request->user_status == 'on' ? 'on' : 'off',
             ]);
