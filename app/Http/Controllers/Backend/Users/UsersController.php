@@ -97,8 +97,7 @@ class UsersController extends Controller
             ]);
             return response(['status' => 'success', 'title' => 'Başarılı', 'content' => 'Kullanıcı Güncellendi']);
         } catch (\Exception $e) {
-            echo $e;
-            //return response(['status' => 'error', 'title' => 'Başarısız', 'content' => 'Kullanıcı Güncellenemedi']);
+            return response(['status' => 'error', 'title' => 'Başarısız', 'content' => 'Kullanıcı Güncellenemedi']);
         }
     }
 }
