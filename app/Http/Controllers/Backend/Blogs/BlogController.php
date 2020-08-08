@@ -88,7 +88,7 @@ class BlogController extends Controller
                 'blog_description' => $request->blog_description,
                 'blog_tags' => $request->blog_tags,
                 'blog_content' => $request->blog_content,
-                'blog_image' => $request->hasFile('blog_image') ? '/uploads/blogs/' . $slug . '.jpg' : $blogs->page_image,
+                'blog_image' => $request->hasFile('blog_image') ? '/uploads/blogs/' . $slug . '.jpg' : $blogs->blog_image,
                 'blog_author' => Auth::user()->id,
                 'blog_slug' => $slug,
                 'blog_categoryId' => $request->blog_categoryId,
