@@ -33,7 +33,7 @@
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">{{$setting->setting_description}}</label>
                                             <input type="text" name="setting_value" value="{{$setting->setting_value}}"
-                                                   class="form-control" placeholder="Kategori Adı Yazınız">
+                                                   class="form-control">
                                         </div>
                                     @elseif($setting->setting_type == 'textarea')
                                         <div class="form-group">
